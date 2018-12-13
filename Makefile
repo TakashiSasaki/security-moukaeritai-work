@@ -48,6 +48,7 @@ clean:
 		-e '/System32/d' \
 		-e '/VSCode.+keymap/d' \
 		-e '/WinSxS/d' \
+		-e '/Windows.Installer/d' \
 		-e '/\.git.objects/d' \
 		-e '/\/bin\/.+key.?$$/d' \
 		-e '/\/bin\/gpg/d' \
