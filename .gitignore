@@ -16,3 +16,6 @@ curl/
 *.mv
 bin-*/
 bin.file
+everything_curl/
+*.locate_md5
+*.locate_cp
