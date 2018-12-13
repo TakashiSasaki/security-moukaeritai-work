@@ -24,3 +24,5 @@ bin.file
 bin/
 curl/
 everything_curl/
+*.updatedb
+*.updatedb.n
