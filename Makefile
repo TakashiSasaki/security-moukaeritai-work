@@ -1,17 +1,19 @@
-.PHONY: help allinone clean all
+.PHONY: help allinone clean all bin
 .SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0
 ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
 
 all: $(addsuffix .locate_head_1,$(ALL)) \
 	$(addsuffix .locate_head_2,$(ALL)) \
 	$(addsuffix .locate_head_3,$(ALL)) \
-	allinone.locate_0 allinone.md5
+	$(addsuffix .cp,$(ALL)) \
+	allinone.locate_0 allinone.md5 allinone.cp
 
 help:
 	@echo no help
 
 clean:
 	rm -f *.locate *.locate_pruned *.locate_head_?
+	rm -rf bin
 
 %.locate:
 	locate $* >$@
@@ -88,3 +90,9 @@ allinone.locate_0: $(addsuffix .locate_0,$(ALL))
 %.md5: %.locate_0
 	cat $< | xargs -0 md5sum >$@
 
+%.cp: %.md5
+	sed -n -r -e 's/^([0-9a-fA-F]{32})  (.+)$$/cp "\2" \1.bin/p' <$< >$@
+
+bin: allinone.cp
+	mkdir bin	
+	(cd bin; source ../$<)

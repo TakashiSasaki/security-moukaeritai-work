@@ -1,3 +1,4 @@
+*.cp
 *.locate
 *.locate_0
 *.locate_head
@@ -6,3 +7,4 @@
 *.locate_head_3
 *.locate_pruned
 *.md5
+bin/
