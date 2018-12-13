@@ -20,29 +20,41 @@ clean:
 
 %.locate_pruned: %.locate
 	cat $< | sed -n -r\
-		-e '/WinSxS/d' \
-		-e '/SysWOW64/d' \
-		-e '/org.eclipse/d' \
-		-e '/android-[0-9]+/d' \
-		-e '/Program Files/d' \
-		-e '/pub-cache/d' \
-		-e '/gradle.caches/d' \
-		-e '/gradle.wrapper/d' \
-		-e '/xkb.keycodes/d' \
-		-e '/vim80.keymap/d' \
-		-e '/.py$$/d' \
-		-e '/.js$$/d' \
+		-e '/.dat64$$/d' \
+		-e '/.dll$$/d' \
 		-e '/.exe$$/d' \
-		-e '/.pyc$$/d' \
-		-e '/.len$$/d' \
-		-e '/.img$$/d' \
 		-e '/.flat$$/d' \
-		-e '/.png$$/d' \
-		-e '/.java$$/d' \
+		-e '/.img$$/d' \
 		-e '/.jar$$/d' \
-		-e '/.tmpl$$/d' \
+		-e '/.java$$/d' \
+		-e '/.js$$/d' \
+		-e '/.len$$/d' \
+		-e '/.png$$/d' \
+		-e '/.py$$/d' \
+		-e '/.pyc$$/d' \
+		-e '/.qcow2$$/d' \
 		-e '/.sample$$/d' \
+		-e '/.tmpl$$/d' \
+		-e '/AndroidStudio.+keystream$$/d' \
+		-e '/AndroidStudio.+namespacekey$$/d' \
+		-e '/AndroidStudio.+storage$$/d' \
+		-e '/Program Files/d' \
+		-e '/SysWOW64/d' \
 		-e '/System32/d' \
+		-e '/WinSxS/d' \
+		-e '/\/bin\/.+key.?$$/d' \
+		-e '/android-[0-9]+/d' \
+		-e '/android.m2repository/d' \
+		-e '/dart-tool/d' \
+		-e '/doc.keyboard/d' \
+		-e '/flutter-tools/d' \
+		-e '/gradle.caches/d' \
+		-e '/gradle.m2repository/d' \
+		-e '/gradle.wrapper/d' \
+		-e '/org.eclipse/d' \
+		-e '/pub-cache/d' \
+		-e '/vim8..keymap/d' \
+		-e '/xkb.keycodes/d' \
 		-e p >$@
 	wc $@
 
