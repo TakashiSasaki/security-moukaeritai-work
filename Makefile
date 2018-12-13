@@ -42,12 +42,14 @@ clean:
 		-e '/SysWOW64/d' \
 		-e '/System32/d' \
 		-e '/WinSxS/d' \
+		-e '/\.git.objects/d' \
 		-e '/\/bin\/.+key.?$$/d' \
+		-e '/\/bin\/gpg/d' \
 		-e '/android-[0-9]+/d' \
 		-e '/android.m2repository/d' \
 		-e '/dart-tool/d' \
 		-e '/doc.keyboard/d' \
-		-e '/flutter-tools/d' \
+		-e '/flutter_tools/d' \
 		-e '/gradle.caches/d' \
 		-e '/gradle.m2repository/d' \
 		-e '/gradle.wrapper/d' \
