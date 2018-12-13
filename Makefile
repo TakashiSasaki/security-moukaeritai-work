@@ -1,51 +1,9 @@
-.PHONY: help allinone clean all bin everything bin-trash everything_curl
-.SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0 .locate_cp\
-	.everything .everything_path .everything_path_pruned .everything_curl
-.PRECIOUS: %.everything_path_pruned
-EVERYTHING=127.0.0.1:80
+.PHONY: help allinone clean all bin 
 ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
 
 help:
 	@echo no help
 
-locate: $(addsuffix .locate_head_1,$(ALL)) \
-	$(addsuffix .locate_head_2,$(ALL)) \
-	$(addsuffix .locate_head_3,$(ALL)) \
-	$(addsuffix .locate_cp,$(ALL)) \
-	locate_cp
-
-everything: everything_curl
-
-clean:
-	rm -f *.locate *.locate_pruned *.locate_head_?
-	rm -rf everything_curl locate_cp
-
-%.locate:
-	-locate $* >$@
-
-%.everything:
-	echo $*
-	curl 'http://${EVERYTHING}/?j=1&path_column=1&q=$*' >$@
-
-%.everything_path: %.everything
-	cat $< | jq --raw-output ".results | .[] |(.path+\"\\\\\"+.name)" >$@
-	#sed -n -r 's/^[\t ]+\"path\":\"(.+)\"[\r\n]+$$/\1/p' $< | sort | uniq >$@
-
-%.everything_path_pruned: %.everything_path
-	$(call prune)
-
-%.everything_curl: %.everything_path_pruned
-	sed -n -r 's/^(.+)$$/curl "http:\/\/${EVERYTHING}\/\1" -g -s -S -R -o `mktemp -p . -u`.bin/p' $< >$@
-
-everything_curl: $(addsuffix .everything_curl,$(ALL))
-	#echo $^ | xargs -n1 -I {} '(mkdir {}; cd {}; sh -x ../{})'
-	echo $^ | xargs -d\  -t -n1 -I {} sh -c 'mkdir $@; cd $@; sh -x ../{}'
-
-%.locate_0 : %.locate_pruned
-	tr '\n\r' '\0\0' <$< >$@
-
-%.locate_pruned: %.locate
-	$(call prune)
 
 define prune
 	cat $< | sed -n -r\
@@ -75,6 +33,7 @@ define prune
 		-e '/\.azw..$$/d' \
 		-e '/\.c$$/d' \
 		-e '/\.code$$/d' \
+		-e '/\.ini$$/d' \
 		-e '/\.lua$$/d' \
 		-e '/\.cpp$$/d' \
 		-e '/\.css$$/d' \
@@ -129,6 +88,8 @@ define prune
 		-e '/\.svn.+prop-base/d' \
 		-e '/\.svn.+text-base/d' \
 		-e '/\.tmpl$$/d' \
+		-e '/\.ui$$/d' \
+		-e '/\.dsp$$/d' \
 		-e '/\.translation$$/d' \
 		-e '/\.vbs$$/d' \
 		-e '/\.vcproj$$/d' \
@@ -160,35 +121,6 @@ define prune
 	wc $@
 endef
 
-%.locate_head_1 : %.locate_0
-	-(cat $< | xargs -n 1 -0 head -v -n 1 ) >$@
-	wc $@
-
-%.locate_head_2 : %.locate_0
-	-(cat $< | xargs -n 1 -0 head -v -n 2 ) >$@
-	wc $@
-
-%.locate_head_3 : %.locate_0
-	-(cat $< | xargs -n 1 -0 head -v -n 3 ) >$@
-	wc $@
-
-allinone.locate_0: $(addsuffix .locate_0,$(ALL))
-	cat $^  | sort | uniq >$@
-
-%.locate_md5: %.locate_0
-	cat $< | xargs -0 md5sum >$@
-
-%.locate_cp: %.locate_md5
-	sed -n -r -e 's/^([0-9a-fA-F]{32})  (.+)$$/cp "\2" \1.bin/p' <$< >$@
-
-locate_cp: allinone.locate_cp
-	mkdir $@
-	(cd $@; sh -x ../$<)
-
-everything_curl.md5: everything_curl
-	find $</ -mindepth 1 -type f -name "tmp.*" -print0 | xargs -0 md5sum >$@
-
-everything_curl.mv: everything_curl.md5
-	sed -n -r 's/^([0-9a-fA-F]{32})  (.+)$$/mv "\2" everything_curl\/\1.bin/p' $< >$@
-
+include locate.mk
+include everything.mk
 include bin.mk
