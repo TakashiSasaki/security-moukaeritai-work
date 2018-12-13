@@ -1,10 +1,11 @@
-.PHONY: help
+.PHONY: help allinone clean all
 .SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0
 ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
 
 all: $(addsuffix .locate_head_1,$(ALL)) \
 	$(addsuffix .locate_head_2,$(ALL)) \
-	$(addsuffix .locate_head_3,$(ALL))
+	$(addsuffix .locate_head_3,$(ALL)) \
+	allinone.locate_0
 
 help:
 	@echo no help
@@ -74,3 +75,7 @@ clean:
 %.locate_head_3 : %.locate_0
 	-(cat $< | xargs -n 1 -0 head -v -n 3 ) >$@
 	wc $@
+
+allinone.locate_0: $(addsuffix .locate_0,$(ALL))
+	cat $^ >$@
+
