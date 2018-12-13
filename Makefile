@@ -132,4 +132,4 @@ include everything.mk
 include bin.mk
 
 updatedb-cygwin:
-	updatedb --prunepaths="/drives/c/\$$WINDOWS.~BT /drives/c/\$$RECYCLE.BIN /drives/c/\$$Mft"
+	updatedb --prunepaths="/drives/c/\$$WINDOWS.~BT /drives/c/\$$RECYCLE.BIN /drives/c/\$$Mft /drives/c/\$$LogFile"
