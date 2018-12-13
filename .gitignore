@@ -1,4 +1,8 @@
 *.cp
+*.curl
+*.everything
+*.everything_curl
+*.everything_path_pruned
 *.locate
 *.locate_0
 *.locate_head
@@ -8,3 +12,7 @@
 *.locate_pruned
 *.md5
 bin/
+curl/
+*.mv
+bin-*/
+bin.file
