@@ -130,3 +130,6 @@ endef
 include locate.mk
 include everything.mk
 include bin.mk
+
+updatedb-cygwin:
+	updatedb --prunepaths="/drives/c/\$$WINDOWS.~BT /drives/c/\$$RECYCLE.BIN"
