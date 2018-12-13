@@ -1,6 +1,6 @@
 .PHONY: help
 .SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0
-ALL=rsa pem key dsa private priv public pub
+ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
 
 all: $(addsuffix .locate_head_1,$(ALL)) \
 	$(addsuffix .locate_head_2,$(ALL)) \
@@ -51,8 +51,11 @@ clean:
 		-e '/gradle.caches/d' \
 		-e '/gradle.m2repository/d' \
 		-e '/gradle.wrapper/d' \
+		-e '/keybinding/d' \
+		-e '/keycode/d' \
 		-e '/org.eclipse/d' \
 		-e '/pub-cache/d' \
+		-e '/terminfo.+keys$$/d' \
 		-e '/vim8..keymap/d' \
 		-e '/xkb.keycodes/d' \
 		-e p >$@
