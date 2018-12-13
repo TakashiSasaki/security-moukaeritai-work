@@ -41,4 +41,8 @@ bin:: $(addsuffix .everything_renamed,$(ALL))
 
 clean::
 	-rm *.everything_curl	
+	-rm *.everything_md5
+	-rm *.everything_mv
 	-rm *.everything_path_pruned
+	-rm *.everything_renamed
+	-rm -r *.everything_bin/
