@@ -5,7 +5,7 @@ ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
 all: $(addsuffix .locate_head_1,$(ALL)) \
 	$(addsuffix .locate_head_2,$(ALL)) \
 	$(addsuffix .locate_head_3,$(ALL)) \
-	allinone.locate_0
+	allinone.locate_0 allinone.md5
 
 help:
 	@echo no help
@@ -21,15 +21,17 @@ clean:
 
 %.locate_pruned: %.locate
 	cat $< | sed -n -r\
-		-e '/.dat64$$/d' \
+		-e '/.dart$$/d' \
 		-e '/.dll$$/d' \
 		-e '/.exe$$/d' \
 		-e '/.flat$$/d' \
 		-e '/.img$$/d' \
+		-e '/.inf$$/d' \
 		-e '/.jar$$/d' \
 		-e '/.java$$/d' \
 		-e '/.js$$/d' \
 		-e '/.len$$/d' \
+		-e '/.nse$$/d' \
 		-e '/.png$$/d' \
 		-e '/.py$$/d' \
 		-e '/.pyc$$/d' \
@@ -42,10 +44,13 @@ clean:
 		-e '/Program Files/d' \
 		-e '/SysWOW64/d' \
 		-e '/System32/d' \
+		-e '/VSCode.+keymap/d' \
 		-e '/WinSxS/d' \
 		-e '/\.git.objects/d' \
 		-e '/\/bin\/.+key.?$$/d' \
 		-e '/\/bin\/gpg/d' \
+		-e '/\/tzdata/d' \
+		-e '/\/usr\/share\/doc/d' \
 		-e '/android-[0-9]+/d' \
 		-e '/android.m2repository/d' \
 		-e '/dart-tool/d' \
@@ -57,6 +62,7 @@ clean:
 		-e '/keybinding/d' \
 		-e '/keycode/d' \
 		-e '/org.eclipse/d' \
+		-e '/perl.+pm$$/d' \
 		-e '/pub-cache/d' \
 		-e '/terminfo.+keys$$/d' \
 		-e '/vim8..keymap/d' \
@@ -78,4 +84,7 @@ clean:
 
 allinone.locate_0: $(addsuffix .locate_0,$(ALL))
 	cat $^ >$@
+
+%.md5: %.locate_0
+	cat $< | xargs -0 md5sum >$@
 
