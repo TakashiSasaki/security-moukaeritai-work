@@ -25,16 +25,19 @@ everything: everything_curl
 	-mkdir $@
 	(cd $@; sh -x ../$<)
 
-everything_curl: $(addsuffix .everything_curl,$(ALL))
-	#echo $^ | xargs -n1 -I {} '(mkdir {}; cd {}; sh -x ../{})'
-	echo $^ | xargs -d\  -t -n1 -I {} sh -c 'mkdir $@; cd $@; sh -x ../{}'
-
-everything_curl.md5: everything_curl
+%.everything_md5: %.everything_bin
 	find $</ -mindepth 1 -type f -name "tmp.*" -print0 | xargs -0 md5sum >$@
 
-everything_curl.mv: everything_curl.md5
-	sed -n -r 's/^([0-9a-fA-F]{32})  (.+)$$/mv "\2" everything_curl\/\1.bin/p' $< >$@
+%.everything_mv: %.everything_md5
+	sed -n -r 's/^([0-9a-fA-F]{32})  (.+)$$/mv "\2" $(basename $@).everything_bin\/\1.bin/p' $<  >$@
 
+%.everything_renamed: %.everything_mv
+	-sh -x $<
+	touch $@
+
+bin:: $(addsuffix .everything_renamed,$(ALL))
+	-mkdir $@/
+	-echo $(addsuffix .everything_bin,$(basename $^)) | xargs -d\  -t -n1 -I {} echo mv {}/*.bin $@/ | sh -s
 
 clean::
 	-rm *.everything_curl	

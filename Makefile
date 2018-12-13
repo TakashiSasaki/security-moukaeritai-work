@@ -13,35 +13,33 @@ define prune
 		-e '/AndroidStudio.+namespacekey/d' \
 		-e '/AndroidStudio.+storage/d' \
 		-e '/AppIconCache/d' \
+		-e '/LibreOffice.+extensions/d' \
 		-e '/Microsoft.+NetFramework/d' \
-		-e '/catalog_image/d' \
 		-e '/Program Files/d' \
 		-e '/SoftwareDistribution.+Download/d' \
 		-e '/SysWOW64/d' \
 		-e '/System32/d' \
 		-e '/Tableau.+Caching/d' \
 		-e '/VSCode.+keymap/d' \
-		-e '/Warsaw$$/d' \
 		-e '/WINDOWS.+NewOS/d' \
 		-e '/WINDOWS.~BT/d' \
+		-e '/Warsaw$$/d' \
 		-e '/WinSxS/d' \
-		-e '/share.+terminfo/d' \
 		-e '/Windows.+AppRepository/d' \
 		-e '/Windows.+Installer/d' \
-		-e '/LibreOffice.+extensions/d' \
-		-e '/share.+zoneinfo/d' \
 		-e '/\.azw..$$/d' \
 		-e '/\.azw3$$/d' \
+		-e '/\.bat$$/d' \
 		-e '/\.c$$/d' \
 		-e '/\.code$$/d' \
-		-e '/\.ini$$/d' \
-		-e '/\.lua$$/d' \
+		-e '/\.class$$/d' \
 		-e '/\.cpp$$/d' \
 		-e '/\.css$$/d' \
 		-e '/\.csv$$/d' \
 		-e '/\.dart$$/d' \
 		-e '/\.deb$$/d' \
 		-e '/\.dll$$/d' \
+		-e '/\.dsp$$/d' \
 		-e '/\.egg-info$$/d' \
 		-e '/\.exe$$/d' \
 		-e '/\.flat$$/d' \
@@ -55,6 +53,7 @@ define prune
 		-e '/\.idb$$/d' \
 		-e '/\.img$$/d' \
 		-e '/\.inf$$/d' \
+		-e '/\.ini$$/d' \
 		-e '/\.jar$$/d' \
 		-e '/\.java$$/d' \
 		-e '/\.jpeg$$/d' \
@@ -63,6 +62,7 @@ define prune
 		-e '/\.keymaps$$/d' \
 		-e '/\.len$$/d' \
 		-e '/\.lnk$$/d' \
+		-e '/\.lua$$/d' \
 		-e '/\.lzh$$/d' \
 		-e '/\.man$$/d' \
 		-e '/\.md5$$/d' \
@@ -79,6 +79,7 @@ define prune
 		-e '/\.properties$$/d' \
 		-e '/\.py$$/d' \
 		-e '/\.pyc$$/d' \
+		-e '/\.pyd$$/d' \
 		-e '/\.qcow2$$/d' \
 		-e '/\.res$$/d' \
 		-e '/\.rst$$/d' \
@@ -91,9 +92,8 @@ define prune
 		-e '/\.svn.+prop-base/d' \
 		-e '/\.svn.+text-base/d' \
 		-e '/\.tmpl$$/d' \
-		-e '/\.ui$$/d' \
-		-e '/\.dsp$$/d' \
 		-e '/\.translation$$/d' \
+		-e '/\.ui$$/d' \
 		-e '/\.vbs$$/d' \
 		-e '/\.vcproj$$/d' \
 		-e '/\.xml$$/d' \
@@ -102,6 +102,7 @@ define prune
 		-e '/android.+m2repository/d' \
 		-e '/bin.+gpg/d' \
 		-e '/bin.+key/d' \
+		-e '/catalog_image/d' \
 		-e '/dart-tool/d' \
 		-e '/doc.keyboard/d' \
 		-e '/flutter_tools/d' \
@@ -114,6 +115,8 @@ define prune
 		-e '/org.+eclipse/d' \
 		-e '/perl.+pm$$/d' \
 		-e '/pub-cache/d' \
+		-e '/share.+terminfo/d' \
+		-e '/share.+zoneinfo/d' \
 		-e '/softwaredistribution.+Download/d' \
 		-e '/terminfo.+keys$$/d' \
 		-e '/tzdata/d' \

@@ -1,8 +1,3 @@
-bin: locate_cp everything_curl
-	-mkdir $@
-	-mv everything_curl/*.bin $@
-	-mv locate_cp/*.bin $@
-
 bin.file:
 	file bin/* >$@
 

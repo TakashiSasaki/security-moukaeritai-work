@@ -5,6 +5,9 @@
 *.everything_curl
 *.everything_curl/
 *.everything_path_pruned
+*.everything_renamed
+*.everything_md5
+*.everything_mv
 *.locate
 *.locate_0
 *.locate_cp
