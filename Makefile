@@ -31,6 +31,7 @@ define prune
 		-e '/LibreOffice.+extensions/d' \
 		-e '/share.+zoneinfo/d' \
 		-e '/\.azw..$$/d' \
+		-e '/\.azw3$$/d' \
 		-e '/\.c$$/d' \
 		-e '/\.code$$/d' \
 		-e '/\.ini$$/d' \
@@ -64,6 +65,8 @@ define prune
 		-e '/\.lnk$$/d' \
 		-e '/\.lzh$$/d' \
 		-e '/\.man$$/d' \
+		-e '/\.md5$$/d' \
+		-e '/\.md5sums$$/d' \
 		-e '/\.mkv$$/d' \
 		-e '/\.mp3$$/d' \
 		-e '/\.mp33$$/d' \

@@ -1,6 +1,6 @@
 .PHONY: clean everything_curl everything_curl.md5 everything_curl.mv
 .PRECIOUS: %.everything_path_pruned
-.SUFFIXES: .everything .everything_path .everything_path_pruned .everything_curl
+.SUFFIXES: .everything .everything_path .everything_path_pruned .everything_curl .everything_bin
 EVERYTHING=127.0.0.1:80
 
 
@@ -20,6 +20,10 @@ everything: everything_curl
 
 %.everything_curl: %.everything_path_pruned
 	sed -n -r 's/^(.+)$$/curl "http:\/\/${EVERYTHING}\/\1" -g -s -S -R -o `mktemp -p . -u`.bin/p' $< >$@
+
+%.everything_bin: %.everything_curl
+	-mkdir $@
+	(cd $@; sh -x ../$<)
 
 everything_curl: $(addsuffix .everything_curl,$(ALL))
 	#echo $^ | xargs -n1 -I {} '(mkdir {}; cd {}; sh -x ../{})'
