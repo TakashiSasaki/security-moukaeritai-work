@@ -131,20 +131,3 @@ include locate.mk
 include everything.mk
 include bin.mk
 
-PRUNEPATHS+=/drives/c/\$$WINDOWS.~BT
-PRUNEPATHS+=/drives/c/\$$RECYCLE.BIN
-
-updatedb: windows.updatedb pf86.updatedb pf64.updatedb
-
-windows.updatedb:
-	updatedb --output=$@ --prunepaths="${PRUNEPATHS}" --localpaths=/drives/c/Windows 
-
-pf86.updatedb:
-	updatedb --output=$@ --prunepaths="${PRUNEPATHS}" --localpaths="/drives/c/Program?Files?\(x86\)"
-
-pf64.updatedb:
-	updatedb --output=$@ --prunepaths="${PRUNEPATHS}" --localpaths='/drives/c/Program?Files'
-
-users.updatedb:
-	updatedb --output=$@ --prunepaths="${PRUNEPATHS}" --localpaths='/drives/c/Users'
-
