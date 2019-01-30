@@ -8,3 +8,4 @@
 *.locate_pruned
 *.md5
 bin/
+*.swp
