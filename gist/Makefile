@@ -1,9 +1,18 @@
 .PHONY: help allinone clean all bin 
+
+ifndef clean-included
+include clean.mk
+endif
+
+.SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0
+
 ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
 
-help:
-	@echo no help
+%.locate:
+	locate $* >$@
 
+%.locate_0 : %.locate_pruned
+	tr '\n\r' '\0\0' <$< >$@
 
 define prune
 	cat $< | sed -n -r\
