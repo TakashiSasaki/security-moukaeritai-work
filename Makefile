@@ -1,3 +1,7 @@
+ifndef clean-included
+include clean.mk
+endif
+
 .PHONY: help allinone clean all bin
 .SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0
 ALL=rsa pem key dsa private priv public pub gpg pgp crt cert
@@ -11,9 +15,9 @@ all: $(addsuffix .locate_head_1,$(ALL)) \
 help:
 	@echo no help
 
-clean:
-	rm -f *.locate *.locate_pruned *.locate_head_?
-	rm -rf bin
+#clean:
+#	rm -f *.locate *.locate_pruned *.locate_head_?
+#	rm -rf bin
 
 %.locate:
 	locate $* >$@
