@@ -2,18 +2,17 @@ ifndef keylike-included
 keylike-included=1
 .DELETE_ON_ERROR:
 .PHONY: keylike-default
-keylike-default: home.keylike.md5s
+keylike-default: home.keylike.md5s home.filetypes
 
+SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 ifndef clean-included
-include clean.mk
+include $(SELF_DIR)clean.mk
 endif
-
 ifndef md5-included
-include md5.mk
+include $(SELF_DIR)md5.mk
 endif
-
 ifndef updatedb-included
-include updatedb.mk
+include $(SELF_DIR)updatedb.mk
 endif
 
 .SUFFIXES: .locate .locate_pruned .locate_head_1 .locate_head_2 .locate_head_3 .locate_0
@@ -79,6 +78,9 @@ keylike_suffixes=rsa pem key dsa private priv public pub gpg pgp crt cert
 bin: allinone.cp
 	mkdir bin	
 	(cd bin; source ../$<)
+
+%.filetypes: %.files
+	file -f $< >$@
 
 endif # keylike-included
 
